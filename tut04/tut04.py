@@ -11,7 +11,7 @@ import pandas as pd
 os.system('cls')
 # os.system('clear')
 
-def octant_longest_subsequence_count():
+def octant_longest_subsequence_count_with_range():
     df = pd.read_excel('input_octant_longest_subsequence_with_range.xlsx')  
     # adding the values for avarage
     u1_avg=df['U'].mean()
@@ -86,10 +86,12 @@ def octant_longest_subsequence_count():
     df.at[7,'Count']='4'
     df.at[8,'Count']='-4'
     list_oct=[1,-1,2,-2,3,-3,4,-4]
-
+    intervals = {1:{}, -1:{}, 2:{}, -2:{}, 3:{}, -3:{}, 4:{}, -4:{},}
 
     idx=1
+    row = 0
     for i in list_oct:
+        row2 = row
         a=i
         l=0;
         r=0;
@@ -110,6 +112,13 @@ def octant_longest_subsequence_count():
         r=0;
         ans1=0;
         cnt=0
+        df.at[row, 'Count_'] = i
+        df.at[row, 'Longest Subsequence length'] = ans
+        row += 1
+        df.at[row, 'Count_'] = "Time"
+        df.at[row, 'Longest Subsequence length'] = "From"
+        df.at[row, 'count'] = "To"
+        row += 1
         while((l<=r&r<n)&(l<n)):    
             if((octant_list[l]==octant_list[r])&((octant_list[l]==a)&(octant_list[r]==a))):
                 r=r+1
@@ -117,6 +126,9 @@ def octant_longest_subsequence_count():
                 # if(ans<r-l+1)
                 ans1=max(ans1,r-l)
                 if(ans1==ans):
+                    df.at[row, 'Longest Subsequence length'] = df.at[l, 'Time']
+                    df.at[row, 'count'] = df.at[r-1, 'Time']
+                    row += 1
                     cnt=cnt+1
                     ans1=0
                 l=r
@@ -124,11 +136,15 @@ def octant_longest_subsequence_count():
             if(r==n):
                 ans1=max(ans1,r-l) 
                 if(ans1==ans):
+                    df.at[row, 'Longest Subsequence length'] = df.at[l, 'Time']
+                    df.at[row, 'count'] = df.at[r-1, 'Time']
+                    row += 1
                     cnt=cnt+1         
+        df.at[row2, 'count'] = cnt
         df.at[idx,'Longest Subsquence Length']=ans
         df.at[idx,' Frequency']=cnt
         idx+=1    
 
 
-    df.to_excel("output_octant_longest_subsequence.xlsx",index=False)
-octant_longest_subsequence_count()
+    df.to_excel("output_octant_longest_subsequence_with_range.xlsx",index=False)
+octant_longest_subsequence_count_with_range()
