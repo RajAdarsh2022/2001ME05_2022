@@ -73,18 +73,18 @@ def octant_longest_subsequence_count():
                     octant_list.append(df.at[i,'Octant'])
     except:
         print("Octant_list not found")    
-    # df.at[0,'']=''
-    # df.at[0,'Count']=''
-    # df.at[0,'Longest Subsquence Length']=''
-    # df.at[0,' Frequency']=''
-    # df.at[1,'Count']='1'
-    # df.at[2,'Count']='-1'
-    # df.at[3,'Count']='2'
-    # df.at[4,'Count']='-2'
-    # df.at[5,'Count']='3'
-    # df.at[6,'Count']='-3'
-    # df.at[7,'Count']='4'
-    # df.at[8,'Count']='-4'
+    df.at[0,'']=''
+    df.at[0,'Count']=''
+    df.at[0,'Longest Subsquence Length']=''
+    df.at[0,' Frequency']=''
+    df.at[1,'Count']='1'
+    df.at[2,'Count']='-1'
+    df.at[3,'Count']='2'
+    df.at[4,'Count']='-2'
+    df.at[5,'Count']='3'
+    df.at[6,'Count']='-3'
+    df.at[7,'Count']='4'
+    df.at[8,'Count']='-4'
     list_oct=[1,-1,2,-2,3,-3,4,-4]
 
 
@@ -106,27 +106,27 @@ def octant_longest_subsequence_count():
                 ans=max(ans,r-l)
         
         
-        # l=0;
-        # r=0;
-        # ans1=0;
-        # cnt=0
-        # while((l<=r&r<n)&(l<n)):    
-        #     if((octant_list[l]==octant_list[r])&((octant_list[l]==a)&(octant_list[r]==a))):
-        #         r=r+1
-        #     else :
-        #         # if(ans<r-l+1)
-        #         ans1=max(ans1,r-l)
-        #         if(ans1==ans):
-        #             cnt=cnt+1
-        #             ans1=0
-        #         l=r
-        #         r=r+1
-        #     if(r==n):
-        #         ans1=max(ans1,r-l) 
-        #         if(ans1==ans):
-        #             cnt=cnt+1         
-        # df.at[idx,'Longest Subsquence Length']=ans
-        # df.at[idx,' Frequency']=cnt
+        l=0;
+        r=0;
+        ans1=0;
+        cnt=0
+        while((l<=r&r<n)&(l<n)):    
+            if((octant_list[l]==octant_list[r])&((octant_list[l]==a)&(octant_list[r]==a))):
+                r=r+1
+            else :
+                # if(ans<r-l+1)
+                ans1=max(ans1,r-l)
+                if(ans1==ans):
+                    cnt=cnt+1
+                    ans1=0
+                l=r
+                r=r+1
+            if(r==n):
+                ans1=max(ans1,r-l) 
+                if(ans1==ans):
+                    cnt=cnt+1         
+        df.at[idx,'Longest Subsquence Length']=ans
+        df.at[idx,' Frequency']=cnt
         idx+=1    
 
 
