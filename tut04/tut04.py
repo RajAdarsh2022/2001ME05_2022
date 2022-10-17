@@ -11,12 +11,15 @@ import pandas as pd
 os.system('cls')
 # os.system('clear')
 
+
+# comment for commit 4
 def octant_longest_subsequence_count_with_range():
     df = pd.read_excel('input_octant_longest_subsequence_with_range.xlsx')  
     # adding the values for avarage
     u1_avg=df['U'].mean()
     v1_avg=df['V'].mean()
     w1_avg=df['W'].mean()
+
 
     df.at[0,'u_avg']=u1_avg
     df.at[0,'v_avg']=v1_avg
@@ -72,7 +75,9 @@ def octant_longest_subsequence_count_with_range():
                     df.at[i,'Octant']=-4
                     octant_list.append(df.at[i,'Octant'])
     except:
-        print("Octant_list not found")    
+        print("Octant_list not found")   
+
+    # giving labels to counts 
     df.at[0,'']=''
     df.at[0,'Count']=''
     df.at[0,'Longest Subsquence Length']=''
@@ -119,6 +124,7 @@ def octant_longest_subsequence_count_with_range():
         df.at[row, 'Longest Subsequence length'] = "From"
         df.at[row, 'count'] = "To"
         row += 1
+        #Finding the interval
         while((l<=r&r<n)&(l<n)):    
             if((octant_list[l]==octant_list[r])&((octant_list[l]==a)&(octant_list[r]==a))):
                 r=r+1
