@@ -1,11 +1,10 @@
 
 from ast import Str
 from cmath import inf, nan
-from lib2to3.pytree import type_repr
+
 import os
-from csv import writer
-from csv import reader
-from traceback import print_tb
+
+
 import numpy as np
 import pandas as pd
 os.system('cls')
