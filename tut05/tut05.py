@@ -15,7 +15,7 @@ def octant_range_names(mod=5000):
     except:
         print("There was some error in reading the file")
         exit()
-    
+
     try:
         # Calculating Average Values
         # Calculating Average Value of U, V, W
@@ -31,6 +31,55 @@ def octant_range_names(mod=5000):
     except:
         print("There was some error in calculating the average")
         exit()
+
+    try:
+        l=[]
+    except:
+        print("Error in inserting columns.")
+        exit()
+
+    try:
+        # Calculating the octant values
+        for i in range(0, rows):
+            if df.at[i,"U'=U - U avg"] >= 0 and  df.at[i,"V'=V - V avg"] >= 0:
+                if df.at[i,"W'=W - W avg"] >= 0:
+                  df.at[i, 'Octant'] = 1
+                else:
+                  df.at[i, 'Octant'] = -1
+            elif df.at[i,"U'=U - U avg"] < 0 and  df.at[i,"V'=V - V avg"] >= 0:
+                if df.at[i,"W'=W - W avg"] >= 0:
+                  df.at[i, 'Octant'] = 2
+                else:
+                  df.at[i, 'Octant'] = -2
+            elif df.at[i,"U'=U - U avg"] < 0 and  df.at[i,"V'=V - V avg"] < 0:
+                if df.at[i,"W'=W - W avg"] >= 0:
+                  df.at[i, 'Octant'] = 3
+                else:
+                  df.at[i, 'Octant'] = -3
+            elif df.at[i,"U'=U - U avg"] >= 0 and  df.at[i,"V'=V - V avg"] < 0:
+                if df.at[i,"W'=W - W avg"] >= 0:
+                  df.at[i, 'Octant'] = 4
+                else:
+                  df.at[i, 'Octant'] = -4
+            l.append(df.at[i, 'Octant'])
+
+        df.at[1, ''] = "User Input"
+        df.at[0, 'Octant ID'] = "Overall Count"
+        df.at[1, 'Octant ID'] = "Mod "+ str(mod) 
+
+        df.at[0, "1"] = l.count(1)
+        df.at[0, "-1"] = l.count(-1)
+        df.at[0 ,"2"] = l.count(2)
+        df.at[0 ,"-2"] = l.count(-2)
+        df.at[0 ,"3"] = l.count(3)
+        df.at[0 ,"-3"] = l.count(-3)
+        df.at[0 ,"4"] = l.count(4)
+        df.at[0 ,"-4"] = l.count(-4)
+    except:
+        print("Error in counting octant values.")
+        exit()
+    
+   
         
     
             
