@@ -78,8 +78,33 @@ def octant_range_names(mod=5000):
     except:
         print("Error in counting octant values.")
         exit()
-    
-   
+
+    try:
+        # Split list into ranges and find the count of octant values
+        start = 0
+        end = len(l)
+        step = int(mod)
+        idx=2
+        total_rows_mod = math.ceil(rows/step)
+        for i in range(start, end, step):
+            x = i
+            sub_list = l[x:x+step]
+            y = x+step-1
+            if y>rows:
+                y=rows-1
+            df.at[idx ,'Octant ID'] = str(x)+"-"+str(y)
+            df.at[idx, '1'] = sub_list.count(1)
+            df.at[idx, '-1'] = sub_list.count(-1)
+            df.at[idx, '2'] = sub_list.count(2)
+            df.at[idx, '-2'] = sub_list.count(-2)
+            df.at[idx, '3'] = sub_list.count(3)
+            df.at[idx, '-3'] = sub_list.count(-3)
+            df.at[idx, '4'] = sub_list.count(4)
+            df.at[idx, '-4'] = sub_list.count(-4)
+            idx+=1
+    except:
+        print("Error in counting octant values for ranges.")
+        exit()
         
     
             
