@@ -30,15 +30,7 @@ def attendance_report():
     mc=sum(1 for row in open("input_registered_students.csv"))
     mc_consolidated=sum(1 for row in open("input_attendance.csv"))
     total_dates=list()
-    for j in range(0,mc_consolidated-1):
-        day=inp.at[j,'Timestamp'].split()[0].split('-')[0]
-        month=inp.at[j,'Timestamp'].split()[0].split('-')[1]
-        year=inp.at[j,'Timestamp'].split()[0].split('-')[2]
-        date=datetime.strptime(f'{year}-{month}-{day}', "%Y-%m-%d").date()
-        day_name=date.strftime("%A")
-        if day_name=="Monday" or day_name=="Thursday":
-            if inp.at[j,'Timestamp'].split()[0] not in total_dates:
-                total_dates.append(inp.at[j,'Timestamp'].split()[0])
+
     # max_att=0
     # max_roll=""
     fileName_consolidated=".\output\\attendance_report_consolidated.xlsx"
@@ -61,7 +53,20 @@ def attendance_report():
             duplicated_attendance=0
             t_lec,t_lec_act,t_lec_fake,t_lec_abs,percent=len(total_dates),0,0,0,0
             t_lec_count=0
-            
+            for j in range(0,mc_consolidated-1):
+                if inp.at[j,'Attendance'].split()[0]==rollno:
+                    if inp.at[j,'Timestamp'].split()[0] == sp_date:
+                        t_lec_count+=1
+                        time=inp.at[j,'Timestamp'].split()[1]
+                        hour=time.split(':')[0]
+                        minutes=time.split(':')[1]
+                        if ((hour=='14') or (hour=='15' and minutes=='00')):
+                            if t_lec_act==0:
+                                t_lec_act+=1
+                            else:
+                                duplicated_attendance+=1
+                        else:
+                            t_lec_fake+=1
             
             out.at[0,'Roll']=rollno
             out.at[0,'Name']=rollno_inp.at[i,'Name']
