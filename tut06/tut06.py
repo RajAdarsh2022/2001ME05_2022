@@ -2,8 +2,7 @@
 
 import csv
 import numpy as np
-import tkinter as tk
-import scipy as sc
+
 
 
 import pandas as pd
@@ -62,20 +61,7 @@ def attendance_report():
             duplicated_attendance=0
             t_lec,t_lec_act,t_lec_fake,t_lec_abs,percent=len(total_dates),0,0,0,0
             t_lec_count=0
-            for j in range(0,mc_consolidated-1):
-                if inp.at[j,'Attendance'].split()[0]==rollno:
-                    if inp.at[j,'Timestamp'].split()[0] == sp_date:
-                        t_lec_count+=1
-                        time=inp.at[j,'Timestamp'].split()[1]
-                        hour=time.split(':')[0]
-                        minutes=time.split(':')[1]
-                        if ((hour=='14') or (hour=='15' and minutes=='00')):
-                            if t_lec_act==0:
-                                t_lec_act+=1
-                            else:
-                                duplicated_attendance+=1
-                        else:
-                            t_lec_fake+=1
+            
             
             out.at[0,'Roll']=rollno
             out.at[0,'Name']=rollno_inp.at[i,'Name']
