@@ -3,7 +3,15 @@ start_time = datetime.now()
 
 def octant_analysis(mod):
     # adding the values for avarage
-    
+    u1_avg=df['U'].mean()
+    v1_avg=df['V'].mean()
+    w1_avg=df['W'].mean()
+
+    df.at[0,'u_avg']=u1_avg
+    df.at[0,'v_avg']=v1_avg
+    df.at[0,'w_avg']=w1_avg
+    n=len(df.axes[0])
+    print(n,type(n))
     # print(df['U']-u1_avg)
     #  finding the values of "V'=V - V avg" and insert in outfile using" db.at" function
     for i in range(0,n):
