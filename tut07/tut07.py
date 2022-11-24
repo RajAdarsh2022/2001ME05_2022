@@ -28,38 +28,7 @@ def octant_analysis(mod):
 
     # finding the value of octant ans insert in output file
     try:
-        for i in range(0,n):
-            if(df.at[i,"U'=U - U avg"]>0 and df.at[i,"V'=V - V avg"]>0 and df.at[i,"W'=W - W avg"]>0):
-                df.at[i,"Octant"]=1
-                octant_list.append(df.at[i,'Octant'])
-                
-            if(df.at[i,"U'=U - U avg"]>0 and df.at[i,"V'=V - V avg"]>0 and df.at[i,"W'=W - W avg"]<0):
-                df.at[i,'Octant']=-1
-                octant_list.append(df.at[i,'Octant'])
-                
-            if(df.at[i,"U'=U - U avg"]<0 and df.at[i,"V'=V - V avg"]>0 and df.at[i,"W'=W - W avg"]>0):
-                df.at[i,'Octant']=2
-                octant_list.append(df.at[i,'Octant'])
-                
-            if(df.at[i,"U'=U - U avg"]<0 and df.at[i,"V'=V - V avg"]>0 and df.at[i,"W'=W - W avg"]<0):
-                df.at[i,'Octant']=-2
-                octant_list.append(df.at[i,'Octant'])
-                
-            if(df.at[i,"U'=U - U avg"]<0 and df.at[i,"V'=V - V avg"]<0 and df.at[i,"W'=W - W avg"]>0):
-                df.at[i,'Octant']=3
-                octant_list.append(df.at[i,'Octant'])
-                
-            if(df.at[i,"U'=U - U avg"]<0 and df.at[i,"V'=V - V avg"]<0 and df.at[i,"W'=W - W avg"]<0):
-                    df.at[i,'Octant']=-3
-                    octant_list.append(df.at[i,'Octant'])
-                
-            if(df.at[i,"U'=U - U avg"]>0 and df.at[i,"V'=V - V avg"]<0 and df.at[i,"W'=W - W avg"]>0):
-                df.at[i,'Octant']=4
-                octant_list.append(df.at[i,'Octant'])
-                
-            if(df.at[i,"U'=U - U avg"]>0 and df.at[i,"V'=V - V avg"]<0 and df.at[i,"W'=W - W avg"]<0):
-                    df.at[i,'Octant']=-4
-                    octant_list.append(df.at[i,'Octant'])
+        
     except:
         print("Octant_list not found")   
 
