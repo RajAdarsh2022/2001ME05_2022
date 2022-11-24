@@ -28,7 +28,38 @@ def octant_analysis(mod):
 
     # finding the value of octant ans insert in output file
     try:
-        
+        for i in range(0,n):
+            if(df.at[i,"U'=U - U avg"]>0 and df.at[i,"V'=V - V avg"]>0 and df.at[i,"W'=W - W avg"]>0):
+                df.at[i,"Octant"]=1
+                octant_list.append(df.at[i,'Octant'])
+                
+            if(df.at[i,"U'=U - U avg"]>0 and df.at[i,"V'=V - V avg"]>0 and df.at[i,"W'=W - W avg"]<0):
+                df.at[i,'Octant']=-1
+                octant_list.append(df.at[i,'Octant'])
+                
+            if(df.at[i,"U'=U - U avg"]<0 and df.at[i,"V'=V - V avg"]>0 and df.at[i,"W'=W - W avg"]>0):
+                df.at[i,'Octant']=2
+                octant_list.append(df.at[i,'Octant'])
+                
+            if(df.at[i,"U'=U - U avg"]<0 and df.at[i,"V'=V - V avg"]>0 and df.at[i,"W'=W - W avg"]<0):
+                df.at[i,'Octant']=-2
+                octant_list.append(df.at[i,'Octant'])
+                
+            if(df.at[i,"U'=U - U avg"]<0 and df.at[i,"V'=V - V avg"]<0 and df.at[i,"W'=W - W avg"]>0):
+                df.at[i,'Octant']=3
+                octant_list.append(df.at[i,'Octant'])
+                
+            if(df.at[i,"U'=U - U avg"]<0 and df.at[i,"V'=V - V avg"]<0 and df.at[i,"W'=W - W avg"]<0):
+                    df.at[i,'Octant']=-3
+                    octant_list.append(df.at[i,'Octant'])
+                
+            if(df.at[i,"U'=U - U avg"]>0 and df.at[i,"V'=V - V avg"]<0 and df.at[i,"W'=W - W avg"]>0):
+                df.at[i,'Octant']=4
+                octant_list.append(df.at[i,'Octant'])
+                
+            if(df.at[i,"U'=U - U avg"]>0 and df.at[i,"V'=V - V avg"]<0 and df.at[i,"W'=W - W avg"]<0):
+                    df.at[i,'Octant']=-4
+                    octant_list.append(df.at[i,'Octant'])
     except:
         print("Octant_list not found")   
 
@@ -269,7 +300,18 @@ def octant_analysis(mod):
         df.at[ptr_tmp, 'Count##'] = cnt
         idx+=1
 
-    
+    lis2 = [octant_list[i * mod:(i + 1) * mod] for i in range((len(octant_list) + mod - 1) // mod )] 
+    for x in lis2:
+        df2=pd.DataFrame(columns=['1','-1','2','-2','3','-3','4','-4'],index=['1','-1','2','-2','3','-3','4','-4'])
+        df2=df2.fillna(0)
+        # print(df2)
+
+        # print(df2['1']['1'])
+        print(len(x),end='  ')
+        for j in range(0,len(x)-1):
+            ro=str(int(x[j]))
+            co=str(int(x[j+1]))
+            df2.loc[ro,co]+=1
 
 
     df.at[0, 'AJ'] = ''
@@ -309,18 +351,7 @@ def octant_analysis(mod):
     i=i+7
     st=0
     # lis2=np.array_split(octant_list, mod)     
-    lis2 = [octant_list[i * mod:(i + 1) * mod] for i in range((len(octant_list) + mod - 1) // mod )] 
-    for x in lis2:
-        df2=pd.DataFrame(columns=['1','-1','2','-2','3','-3','4','-4'],index=['1','-1','2','-2','3','-3','4','-4'])
-        df2=df2.fillna(0)
-        # print(df2)
-
-        # print(df2['1']['1'])
-        print(len(x),end='  ')
-        for j in range(0,len(x)-1):
-            ro=str(int(x[j]))
-            co=str(int(x[j+1]))
-            df2.loc[ro,co]+=1
+    
         
         i=i+3  
         df.at[i,'AK']="Mod Transition Count"
