@@ -3,15 +3,7 @@ start_time = datetime.now()
 
 def octant_analysis(mod):
     # adding the values for avarage
-    u1_avg=df['U'].mean()
-    v1_avg=df['V'].mean()
-    w1_avg=df['W'].mean()
-
-    df.at[0,'u_avg']=u1_avg
-    df.at[0,'v_avg']=v1_avg
-    df.at[0,'w_avg']=w1_avg
-    n=len(df.axes[0])
-    print(n,type(n))
+    
     # print(df['U']-u1_avg)
     #  finding the values of "V'=V - V avg" and insert in outfile using" db.at" function
     for i in range(0,n):
@@ -300,18 +292,7 @@ def octant_analysis(mod):
         df.at[ptr_tmp, 'Count##'] = cnt
         idx+=1
 
-    lis2 = [octant_list[i * mod:(i + 1) * mod] for i in range((len(octant_list) + mod - 1) // mod )] 
-    for x in lis2:
-        df2=pd.DataFrame(columns=['1','-1','2','-2','3','-3','4','-4'],index=['1','-1','2','-2','3','-3','4','-4'])
-        df2=df2.fillna(0)
-        # print(df2)
-
-        # print(df2['1']['1'])
-        print(len(x),end='  ')
-        for j in range(0,len(x)-1):
-            ro=str(int(x[j]))
-            co=str(int(x[j+1]))
-            df2.loc[ro,co]+=1
+    
 
 
     df.at[0, 'AJ'] = ''
@@ -351,7 +332,18 @@ def octant_analysis(mod):
     i=i+7
     st=0
     # lis2=np.array_split(octant_list, mod)     
-    
+    lis2 = [octant_list[i * mod:(i + 1) * mod] for i in range((len(octant_list) + mod - 1) // mod )] 
+    for x in lis2:
+        df2=pd.DataFrame(columns=['1','-1','2','-2','3','-3','4','-4'],index=['1','-1','2','-2','3','-3','4','-4'])
+        df2=df2.fillna(0)
+        # print(df2)
+
+        # print(df2['1']['1'])
+        print(len(x),end='  ')
+        for j in range(0,len(x)-1):
+            ro=str(int(x[j]))
+            co=str(int(x[j+1]))
+            df2.loc[ro,co]+=1
         
         i=i+3  
         df.at[i,'AK']="Mod Transition Count"
